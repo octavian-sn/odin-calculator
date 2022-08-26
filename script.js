@@ -41,6 +41,10 @@ equals.addEventListener('click', equalsResult)
 const clear = document.querySelector('#clear');
 clear.addEventListener('click', clearEverything);
 
+const backspace = document.querySelector('#delete');
+backspace.addEventListener('click', backSpace);
+
+
 var total = 0;
 var valueOne = '';
 var valueTwo = '';
@@ -52,22 +56,25 @@ function useInput() {
     if (control == false) {
         mainDisplay.innerText += this.innerText;
         valueOne += this.innerText;
+        console.log(typeof(valueOne));
     }
     // Change second number while having the first one
     if (control == true && total !== 0) {
         mainDisplay.innerText += this.innerText;
         valueTwo += this.innerText;
+        console.log(typeof(valueOne));
     }
     // Change second number
     if (control == true && total === 0) {
         mainDisplay.innerText += this.innerText;
         valueTwo += this.innerText;
+        console.log(typeof(valueOne));
     }
     console.log(`One:${valueOne}, Two:${valueTwo}, Op:${operator}`);
 }
 
 function useOperator() {
-    // Add operator on a previous calculated number
+    // Add operator onto a previous calculated number
     if (control === true && operator === '') {
         operator = this.innerText;
         mainDisplay.innerText = valueOne + operator;
@@ -77,6 +84,8 @@ function useOperator() {
         operate(operator, valueOne, valueTwo);
         mainDisplay.innerText = total + this.innerText;
         operator = this.innerText;
+        console.log(typeof(valueOne));
+        valueOne = valueOne.toString();
     }
     // Change operators while having first number
     if (control === true && operator !== '' && valueTwo === '') {
@@ -94,9 +103,9 @@ function useOperator() {
 
 function clearEverything(){
     total = 0;
-    valueOne = '';
-    valueTwo = '';
-    operator = '';
+    valueOne = [];
+    valueTwo = [];
+    operator = [];
     control = false;
     mainDisplay.innerText = '';
 }
@@ -106,5 +115,25 @@ function equalsResult(){
         operate(operator, valueOne, valueTwo);
         mainDisplay.innerText = total;
         operator = '';
+        valueOne = valueOne.toString();
     }
+}
+
+function backSpace(){
+    if (control == false || (valueTwo === '' && operator === '')) {
+        if (valueOne == '') {
+            clearEverything();
+            total = 1;}
+        one = valueOne.split('');
+        one.pop();
+        valueOne = one.join('');
+        mainDisplay.innerText = valueOne;
+    }
+    if (valueTwo !== '' && operator !== '' && valueOne !== '') {
+        two = valueTwo.split('');
+        two.pop()
+        valueTwo = two.join('');
+        mainDisplay.innerText = valueOne + operator + valueTwo;
+    }
+    console.log(`One:${valueOne}, Two:${valueTwo}, Op:${operator}`);
 }
