@@ -28,13 +28,18 @@ function operate(a, b, c) {
 }
 
 const mainDisplay = document.getElementById('main');
-const stringDisplay = document.getElementById('string');
 
 const numbers = document.querySelectorAll('.number');
 numbers.forEach(item => item.addEventListener('click', useInput));
 
 const operators = document.querySelectorAll('.operator')
 operators.forEach(item => item.addEventListener('click', useOperator));
+
+const equals = document.querySelector('.equals');
+equals.addEventListener('click', equalsResult)
+
+const clear = document.querySelector('#clear');
+clear.addEventListener('click', clearEverything);
 
 var total = 0;
 var valueOne = '';
@@ -62,23 +67,44 @@ function useInput() {
 }
 
 function useOperator() {
-    // Add operator while having the first number
+    // Add operator on a previous calculated number
     if (control === true && operator === '') {
         operator = this.innerText;
-        mainDisplay.innerText = operator;
-        stringDisplay.innerText = operator;
+        mainDisplay.innerText = valueOne + operator;
     }
-    // Operate numbers
-    if (control === true && operator !== '') {
+    // Calculate numbers
+    if (control === true && operator !== '' && valueTwo !== '') {
         operate(operator, valueOne, valueTwo);
-        stringDisplay.innerText = total
         mainDisplay.innerText = total + this.innerText;
-        operator = '';
-    }
-    // Switching to second number
-    if (control === false) {
-        mainDisplay.innerText += this.innerText;
         operator = this.innerText;
+    }
+    // Change operators while having first number
+    if (control === true && operator !== '' && valueTwo === '') {
+        operator = this.innerText;
+        mainDisplay.innerText = valueOne + operator;
+    }
+    // Add operator for the first time
+    if (control === false) {
+        operator = this.innerText;
+        mainDisplay.innerText += operator;
         control = true;
+    } 
+    console.log(`One:${valueOne}, Two:${valueTwo}, Op:${operator}`);
+}
+
+function clearEverything(){
+    total = 0;
+    valueOne = '';
+    valueTwo = '';
+    operator = '';
+    control = false;
+    mainDisplay.innerText = '';
+}
+
+function equalsResult(){
+    if (control === true && operator !== '' && valueTwo !== '') {
+        operate(operator, valueOne, valueTwo);
+        mainDisplay.innerText = total;
+        operator = '';
     }
 }
