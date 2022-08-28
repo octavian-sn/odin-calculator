@@ -1,10 +1,7 @@
 // Basic mathematical operations functions.
 let divide = (a, b) => a / b;
-
 let multiply = (a, b) => a * b;
-
 let subtract = (a, b) => a - b;
-
 let add = (a, b) => (+(a) + +(b));
 
 // Main operating function
@@ -51,61 +48,52 @@ var valueTwo = '';
 var operator = '';
 var control = false;
 
+// Add numbers to operation
 function useInput() {
-    // Change first number
-    if (control == false) {
+    // Change first number 
+    if (control == false || (control == true && operator === '')) {
         mainDisplay.innerText += this.innerText;
         valueOne += this.innerText;
-        console.log(typeof(valueOne));
-    }
-    // Change second number while having the first one
-    if (control == true && total !== 0) {
-        mainDisplay.innerText += this.innerText;
-        valueTwo += this.innerText;
-        console.log(typeof(valueOne));
     }
     // Change second number
-    if (control == true && total === 0) {
+    if (control == true && operator !== '') {
         mainDisplay.innerText += this.innerText;
         valueTwo += this.innerText;
-        console.log(typeof(valueOne));
     }
-    console.log(`One:${valueOne}, Two:${valueTwo}, Op:${operator}`);
 }
 
+// Add operators to operation/calculate pressing operator
 function useOperator() {
     // Add operator onto a previous calculated number
-    if (control === true && operator === '') {
+    if (valueOne !== '' && control === true && operator === '') {
         operator = this.innerText;
         mainDisplay.innerText = valueOne + operator;
     }
     // Calculate numbers
-    if (control === true && operator !== '' && valueTwo !== '') {
+    if (valueOne !== '' && control === true && operator !== '' && valueTwo !== '') {
         operate(operator, valueOne, valueTwo);
         mainDisplay.innerText = total + this.innerText;
         operator = this.innerText;
-        console.log(typeof(valueOne));
         valueOne = valueOne.toString();
     }
-    // Change operators while having first number
-    if (control === true && operator !== '' && valueTwo === '') {
+    // Change operators
+    if (valueOne !== '' && control === true && operator !== '' && valueTwo === '') {
         operator = this.innerText;
         mainDisplay.innerText = valueOne + operator;
     }
     // Add operator for the first time
-    if (control === false) {
+    if (valueOne !== '' && control === false) {
         operator = this.innerText;
         mainDisplay.innerText += operator;
         control = true;
     } 
-    console.log(`One:${valueOne}, Two:${valueTwo}, Op:${operator}`);
 }
 
 function clearEverything(){
     total = 0;
-    valueOne = [];
-    valueTwo = [];
-    operator = [];
+    valueOne = '';
+    valueTwo = '';
+    operator = '';
     control = false;
     mainDisplay.innerText = '';
 }
@@ -120,20 +108,30 @@ function equalsResult(){
 }
 
 function backSpace(){
-    if (control == false || (valueTwo === '' && operator === '')) {
-        if (valueOne == '') {
-            clearEverything();
-            total = 1;}
+    // Delete first number decimals
+    if (valueTwo === '' && operator === '') {
         one = valueOne.split('');
         one.pop();
         valueOne = one.join('');
         mainDisplay.innerText = valueOne;
+        if (valueOne === '') {
+            clearEverything();
+        }
+        if (total === 0) {control = false}
     }
-    if (valueTwo !== '' && operator !== '' && valueOne !== '') {
+    //Delete operator
+    if (valueTwo === '' && operator !== '') {
+        operator = '';
+        control = false;
+        mainDisplay.innerText = valueOne;
+    }
+    // Delete second number decimals
+    if (valueTwo !== '' && operator !== '') {
         two = valueTwo.split('');
         two.pop()
         valueTwo = two.join('');
         mainDisplay.innerText = valueOne + operator + valueTwo;
     }
-    console.log(`One:${valueOne}, Two:${valueTwo}, Op:${operator}`);
 }
+
+// console.log(`One:${valueOne}, Two:${valueTwo}, Op:${operator}, Total:${total}, Control:${control}, TypeOne:${typeof(valueOne)}`)
