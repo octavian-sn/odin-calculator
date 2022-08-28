@@ -27,13 +27,13 @@ function operate(a, b, c) {
 const mainDisplay = document.getElementById('main');
 
 const numbers = document.querySelectorAll('.number');
-numbers.forEach(item => item.addEventListener('click', useInput));
+numbers.forEach(item => item.addEventListener('click', useNumbers));
 
-const operators = document.querySelectorAll('.operator')
+const operators = document.querySelectorAll('.operator');
 operators.forEach(item => item.addEventListener('click', useOperator));
 
 const equals = document.querySelector('.equals');
-equals.addEventListener('click', equalsResult)
+equals.addEventListener('click', equalsResult);
 
 const clear = document.querySelector('#clear');
 clear.addEventListener('click', clearEverything);
@@ -41,15 +41,19 @@ clear.addEventListener('click', clearEverything);
 const backspace = document.querySelector('#delete');
 backspace.addEventListener('click', backSpace);
 
+const dot = document.querySelector('.dot');
+dot.addEventListener('click', addDot);
+
 
 var total = 0;
 var valueOne = '';
 var valueTwo = '';
 var operator = '';
+// Control-false = working on valueOne ;true = working on valueTwo
 var control = false;
 
 // Add numbers to operation
-function useInput() {
+function useNumbers() {
     // Change first number 
     if (control == false || (control == true && operator === '')) {
         mainDisplay.innerText += this.innerText;
@@ -134,4 +138,20 @@ function backSpace(){
     }
 }
 
+function addDot() {
+    // Add dot on first number
+    if (control == false || (control == true && operator === '')) {
+        let one = valueOne.split('');
+        (one.some(item => item == '.')) ? nothing : one.push('.');
+        valueOne = one.join('');
+        mainDisplay.innerText = valueOne;
+    }
+    // Add dot on second numbers
+    if (control == true && operator !== '') {
+        let two = valueTwo.split('');
+        (two.some(item => item == '.')) ? nothing : two.push('.');
+        valueTwo = two.join('');
+        mainDisplay.innerText = valueOne + operator + valueTwo;
+    }
+}
 // console.log(`One:${valueOne}, Two:${valueTwo}, Op:${operator}, Total:${total}, Control:${control}, TypeOne:${typeof(valueOne)}`)
