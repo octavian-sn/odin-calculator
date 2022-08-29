@@ -94,9 +94,10 @@ function useOperator() {
     // Calculate numbers
     if (valueOne !== '' && control === true && operator !== '' && valueTwo !== '') {
         operate(operator, valueOne, valueTwo);
+        valueOne = valueOne.toString();
+        roundNumbers();
         mainDisplay.innerText = total + this.innerText;
         operator = this.innerText;
-        valueOne = valueOne.toString();
     }
     // Add operator for the first time
     if (valueOne !== '' && control === false) {
@@ -118,9 +119,10 @@ function clearEverything(){
 function equalsResult(){
     if (control === true && operator !== '' && valueTwo !== '') {
         operate(operator, valueOne, valueTwo);
+        valueOne = valueOne.toString();
+        roundNumbers();
         mainDisplay.innerText = total;
         operator = '';
-        valueOne = valueOne.toString();
     }
 }
 
@@ -167,4 +169,13 @@ function addDot() {
         mainDisplay.innerText = valueOne + operator + valueTwo;
     }
 }
-// console.log(`One:${valueOne}, Two:${valueTwo}, Op:${operator}, Total:${total}, Control:${control}, TypeOne:${typeof(valueOne)}`)
+
+function roundNumbers() {
+    let one = valueOne.split('');
+    one.some(function(item){
+        if (item == '.') {
+            total = Math.round(valueOne * 100) / 100
+            valueOne = total.toString();
+        }
+    })
+}
