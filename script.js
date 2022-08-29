@@ -44,6 +44,19 @@ backspace.addEventListener('click', backSpace);
 const dot = document.querySelector('.dot');
 dot.addEventListener('click', addDot);
 
+// Add keyboard support
+const buttons = Array.from(document.querySelectorAll('button'));
+window.addEventListener('keydown', function(e){
+    buttons.some(function(item) { 
+        if (item.innerText == e.key) {
+            document.getElementById(`${e.key}`).click();
+        };
+    })
+    if (e.key == 'Enter') {document.getElementById('enter').click()}
+    if (e.key == 'Backspace') {document.getElementById('delete').click()}
+    if (e.key == 'Escape') {document.getElementById('clear').click()}
+})
+
 
 var total = 0;
 var valueOne = '';
@@ -55,7 +68,7 @@ var control = false;
 // Add numbers to operation
 function useNumbers() {
     // Change first number 
-    if (control == false || (control == true && operator === '')) {
+    if (control == false || (control == true && operator === '' && valueTwo === '')) {
         mainDisplay.innerText += this.innerText;
         valueOne += this.innerText;
     }
@@ -73,6 +86,11 @@ function useOperator() {
         operator = this.innerText;
         mainDisplay.innerText = valueOne + operator;
     }
+    // Change operators
+    if (valueOne !== '' && control === true && operator !== '' && valueTwo === '') {
+        operator = this.innerText;
+        mainDisplay.innerText = valueOne + operator;
+    }
     // Calculate numbers
     if (valueOne !== '' && control === true && operator !== '' && valueTwo !== '') {
         operate(operator, valueOne, valueTwo);
@@ -80,17 +98,12 @@ function useOperator() {
         operator = this.innerText;
         valueOne = valueOne.toString();
     }
-    // Change operators
-    if (valueOne !== '' && control === true && operator !== '' && valueTwo === '') {
-        operator = this.innerText;
-        mainDisplay.innerText = valueOne + operator;
-    }
     // Add operator for the first time
     if (valueOne !== '' && control === false) {
         operator = this.innerText;
         mainDisplay.innerText += operator;
         control = true;
-    } 
+    }
 }
 
 function clearEverything(){
@@ -146,7 +159,7 @@ function addDot() {
         valueOne = one.join('');
         mainDisplay.innerText = valueOne;
     }
-    // Add dot on second numbers
+    // Add dot on second number
     if (control == true && operator !== '') {
         let two = valueTwo.split('');
         (two.some(item => item == '.')) ? nothing : two.push('.');
