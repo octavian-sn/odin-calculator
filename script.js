@@ -67,6 +67,9 @@ var control = false;
 
 // Add numbers to operation
 function useNumbers() {
+    if (control == false && valueOne == '') {
+        mainDisplay.innerText = '';
+    }
     // Change first number 
     if (control == false || (control == true && operator === '' && valueTwo === '')) {
         mainDisplay.innerText += this.innerText;
@@ -171,6 +174,12 @@ function addDot() {
 }
 
 function roundNumbers() {
+    // Dividing by zero
+    if (total == Infinity) {
+        clearEverything();
+        total = '✩｡:*•.─────  ❁ ❁  ─────.•*:｡✩'
+    }
+    // Rounding long decimal numbers
     let one = valueOne.split('');
     one.some(function(item){
         if (item == '.') {
