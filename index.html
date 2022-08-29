@@ -7,35 +7,36 @@
     <title>Digital abacus</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
-</head>
+    <link href='https://fonts.googleapis.com/css?family=Krona One' rel='stylesheet'></head>
 <body>
     <div id="calculator">
         <div id="window">
+            <div id="string"></div>
             <div id="main"></div>
         </div>
-        <div id="refresh">
+        <div class="row" id="refresh">
             <button id="clear">CLEAR</button>
             <button id="delete">DELETE</button>
         </div>
-        <div id="row7">
+        <div class="row" id="row7">
             <button class="number" id="7">7</button>
             <button class="number" id="8">8</button>
             <button class="number" id="9">9</button>
             <button class="operator" id="/">/</button>
         </div>
-        <div id="row4">
+        <div class="row" id="row4">
             <button class="number" id="4">4</button>
             <button class="number" id="5">5</button>
             <button class="number" id="6">6</button>
             <button class="operator" id="*">*</button>
         </div>
-        <div id="row1">
+        <div class="row" id="row1">
             <button class="number" id="1">1</button>
             <button class="number" id="2">2</button>
             <button class="number" id="3">3</button>
             <button class="operator" id="-">-</button>
         </div>
-        <div id="row0">
+        <div class="row" id="row0">
             <button class="number" id="0">0</button>
             <button class="dot" id=".">.</button>
             <button class="equals" id="enter">=</button>

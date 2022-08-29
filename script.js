@@ -25,6 +25,7 @@ function operate(a, b, c) {
 }
 
 const mainDisplay = document.getElementById('main');
+const stringDisplay = document.getElementById('string');
 
 const numbers = document.querySelectorAll('.number');
 numbers.forEach(item => item.addEventListener('click', useNumbers));
@@ -96,6 +97,7 @@ function useOperator() {
     }
     // Calculate numbers
     if (valueOne !== '' && control === true && operator !== '' && valueTwo !== '') {
+        stringDisplay.innerText = `${valueOne} ${operator} ${valueTwo} =`
         operate(operator, valueOne, valueTwo);
         valueOne = valueOne.toString();
         roundNumbers();
@@ -117,10 +119,12 @@ function clearEverything(){
     operator = '';
     control = false;
     mainDisplay.innerText = '';
+    stringDisplay.innerText = '';
 }
 
 function equalsResult(){
     if (control === true && operator !== '' && valueTwo !== '') {
+        stringDisplay.innerText = `${valueOne} ${operator} ${valueTwo} =`
         operate(operator, valueOne, valueTwo);
         valueOne = valueOne.toString();
         roundNumbers();

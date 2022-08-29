@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Krona One','Courier New';
+    color: rgb(84, 84, 151);
+    
+}
+
+body {display: flex;
+
+    padding-top: 10%;
+    background-color: #f8ebe2;
+    align-items: center;
+    justify-content: center;
+}
+
+#calculator {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    height: 500px;
+    width: 360px;
+    background-color: #e1ddfd;
+    border: 2px solid rgb(164, 157, 238);
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px rgb(65, 65, 65);
+    padding: 20px;
+    gap: 12px;
+    border-width: 2px 3px 3px 2px;
+
+}
+
+.row{
+    height: 90%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+#window {
+    background-color: aliceblue;
+    height: 100px;
+    width: 100%;
+    flex: 1 0 auto;
+    margin-bottom: 10px;
+    border: 5px solid rgb(255, 255, 255);
+    border-radius: 3px;
+    font-size: large;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+#main {
+    height: 65%;
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    flex: 0 0 auto;
+    overflow: hidden;
+}
+
+#string {
+    height: 35%;
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    flex: 0 0 auto;
+    font-size: small;
+    overflow: hidden;
+    padding-top: 18px;
+}
+
+#refresh > button {
+    flex: 2 1 auto;
+}
+
+button {
+    width: 100%;
+    background-color: rgb(238, 238, 248);
+    border-radius: 5px;
+    border-width: 1px 2px 2px 1px;
+    border-style: solid;
+    border-color: rgb(121, 121, 187) rgb(5, 5, 88) rgb(5, 5, 88) rgb(121, 121, 187);
+    font-size: medium;
+}
