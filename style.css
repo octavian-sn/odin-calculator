@@ -49,11 +49,11 @@ body {display: flex;
     font-size: large;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     padding: 0 10px;
 }
 
 #main {
-    height: 65%;
     align-items: center;
     display: flex;
     flex-direction: row-reverse;
@@ -62,14 +62,12 @@ body {display: flex;
 }
 
 #string {
-    height: 35%;
     align-items: center;
     display: flex;
     flex-direction: row-reverse;
     flex: 0 0 auto;
     font-size: small;
     overflow: hidden;
-    padding-top: 18px;
 }
 
 #refresh > button {
@@ -84,4 +82,17 @@ button {
     border-style: solid;
     border-color: rgb(121, 121, 187) rgb(5, 5, 88) rgb(5, 5, 88) rgb(121, 121, 187);
     font-size: medium;
+    transition-duration: 0.2s;
 }
+
+button:hover{
+    background-color: rgb(172, 172, 241);
+    color: rgb(238, 238, 248);
+
+}
+
+button:active {
+    background-color: rgb(121, 121, 187);
+    box-shadow: 0 2px rgb(5, 5, 88);
+    transform: translateY(3px);
+  }
