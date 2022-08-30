@@ -5,12 +5,14 @@
     
 }
 
-body {display: flex;
-
+body {
+    display: flex;
+    flex-direction: column;
     padding-top: 10%;
     background-color: #f8ebe2;
     align-items: center;
-    justify-content: center;
+    height: 98vh;
+    justify-content: space-between;
 }
 
 #calculator {
@@ -27,7 +29,7 @@ body {display: flex;
     padding: 20px;
     gap: 12px;
     border-width: 2px 3px 3px 2px;
-
+    flex: 0 0 auto
 }
 
 .row{
@@ -96,3 +98,10 @@ button:active {
     box-shadow: 0 2px rgb(5, 5, 88);
     transform: translateY(3px);
   }
+
+.git {
+    display: flex;
+    align-items: center;
+    font-size: small;
+    gap: 10px;
+}
